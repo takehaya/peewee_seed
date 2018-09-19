@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  check_format:
+    docker:
+      - image: circleci/python:3.6
+    steps:
+      - checkout
+      - run:
+          name: install development deps
+          command: pipenv install -d
+      - run:
+          name: check code format with hacking
+          command: pipenv run flake8
+      - run:
+          name: check code format with black
+          command: pipenv run black --py36 --check .
+      - run:
+          name: check code format with isort
+          command: pipenv run isort --recursive --check-only --force-single-line --skip .venv .
+
+      - store_artifacts:
+          path: /home/circleci/project/cover/
+
+workflows:
+  version: 2
+  tests:
+    jobs:
+      - check_format
