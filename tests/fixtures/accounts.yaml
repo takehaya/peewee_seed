@@ -1,0 +1,12 @@
+- model : tests.test_db_model.Account
+  id: 1
+  fields:
+    first_name: John
+    last_name: Smith
+    age: 20
+- model : tests.test_db_model.Account
+  id: 2
+  fields:
+    first_name: take
+    last_name: haya
+    age: 19

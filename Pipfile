@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pyyaml = "*"
+peewee = "*"
+
+[dev-packages]
+hacking = {git = "https://github.com/aruneko/hacking.git"}
+black = "==18.6b4"
+autoflake = "*"
+isort = "*"
+
+[requires]
+python_version = "3.6"
+
+[scripts]
+fmt = "black --py36 ."
+lint = "flake8"
+unused = "autoflake -i --remove-all-unused-imports --remove-unused-variables --exclude .venv -r ."
+imports = "isort --recursive --force-single-line --skip .venv ."

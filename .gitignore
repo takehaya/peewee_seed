@@ -15,3 +15,5 @@ parts
 *~
 __pycache__
 .idea
+venv
+.pypirc

@@ -16,7 +16,11 @@ jobs:
           command: pipenv run black --py36 --check .
       - run:
           name: check code format with isort
-          command: pipenv run isort --recursive --check-only --force-single-line --skip .venv .
+          command: pipenv run isort --recursive --check-only --force-single-line --skip venv .
+      - run:
+          name: testing
+          command: |
+            python setup.py test
 
       - store_artifacts:
           path: /home/circleci/project/cover/
