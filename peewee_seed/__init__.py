@@ -4,10 +4,15 @@ import os
 
 import yaml
 
-__version__ = "0.1.0"
+import logging
+logger = logging.getLogger('peewee')
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.StreamHandler())
+
+__version__ = "0.1.2"
 
 
-class PeeweeSeeds(object):
+class PeeweeSeed(object):
     def __init__(self, db=None, path=None, fixture_files=None):
         self.db = db
         self.path = path

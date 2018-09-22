@@ -11,7 +11,7 @@ With reference to the [Django fixture](https://docs.djangoproject.com/en/2.1/how
 ```
 /myapp
   __init__.py
-  seeds_entroy.py
+  seeds_entry.py
   models.py
   /fixtures
     accounts.yaml
@@ -45,9 +45,9 @@ class Account(BaseModel):
     last_name = CharField(null=False)
     age = IntegerField(null=True)
 ```
-- seeds entroyfile
+- seeds entry file
 ``` python
-# seeds_entroy.py
+# seeds_entry.py
 from peewee_seeds import PeeweeSeeds
 from myapp.models import database
 
@@ -68,6 +68,12 @@ def main():
 if __name__ == '__main__':
     main()
 ```
+- Run command
+```
+python seeds_entroy.py
+```
+
+
 
 ### other example
 

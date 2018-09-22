@@ -12,10 +12,10 @@ with open(rst_path) as f:
 
 setup(
     name="peewee_seed",
-    version="0.1.1",
+    version="0.1.2",
     author="Takeru Hayasaka",
     author_email="taketarou2@gmail.com",
-    url="",
+    url="https://github.com/takehaya/peewee_seed",
     description="peewee_seed is simple data seeder using peewee.",
     long_description=description,
     license="MIT",
