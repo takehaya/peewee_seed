@@ -23,7 +23,7 @@ class TestFixtures(TestCase):
         seed = PeeweeSeed()
         seed.set_fixture_files(["accounts.yaml", "pictures.yaml"])
 
-        self.assertEqual(seed.path, ["accounts.yaml", "pictures.yaml"])
+        self.assertEqual(seed.fixture_files, ["accounts.yaml", "pictures.yaml"])
 
     def test_load_fixture_file(self):
         seed = PeeweeSeed(database, self.path, ["accounts.yaml"])

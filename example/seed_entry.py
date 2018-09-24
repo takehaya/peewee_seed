@@ -1,16 +1,12 @@
 import os
 from argparse import ArgumentParser
 
-from peewee_seed import PeeweeSeed
 from example.core.models import database
+from peewee_seed import PeeweeSeed
 
 # user_setting field
-paths = [
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "fixtures")
-]
-fixture_files = [
-    ['accounts.yaml', 'pictures.yaml']
-]
+paths = [os.path.join(os.path.dirname(os.path.abspath(__file__)), "fixtures")]
+fixture_files = [["accounts.yaml", "pictures.yaml"]]
 
 # seeds instance
 seed = PeeweeSeed(database)
@@ -43,16 +39,16 @@ def command_seed(args):
 
 
 def get_args():
-    parser = ArgumentParser(prog='seeds_entry')
+    parser = ArgumentParser(prog="seeds_entry")
     subparsers = parser.add_subparsers()
 
-    parent_create = subparsers.add_parser('create', help='db table create')
+    parent_create = subparsers.add_parser("create", help="db table create")
     parent_create.set_defaults(handler=command_create)
 
-    parent_drop = subparsers.add_parser('drop', help='db table drop')
+    parent_drop = subparsers.add_parser("drop", help="db table drop")
     parent_drop.set_defaults(handler=command_drop)
 
-    parent_seed = subparsers.add_parser('seed', help='db table init data input')
+    parent_seed = subparsers.add_parser("seed", help="db table init data input")
     parent_seed.set_defaults(handler=command_seed)
 
     args = parser.parse_args()
@@ -63,11 +59,11 @@ def get_args():
 def main():
     args, parser = get_args()
 
-    if hasattr(args, 'handler'):
+    if hasattr(args, "handler"):
         args.handler(args)
     else:
         parser.print_help()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

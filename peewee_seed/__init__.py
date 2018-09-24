@@ -5,11 +5,12 @@ import os
 import yaml
 
 import logging
-logger = logging.getLogger('peewee')
+
+logger = logging.getLogger("peewee")
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 
 class PeeweeSeed(object):
