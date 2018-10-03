@@ -78,11 +78,11 @@ python seeds_entroy.py
 ### other example
 
 ```python
-from peewee_seeds import PeeweeSeeds
+from peewee_seed import PeeweeSeed
 from myapp.models import database
 
 # seeds instance
-seeds = PeeweeSeeds()
+seeds = PeeweeSeed()
 
 # set path
 seeds.set_path('/path/to/fixtures')
