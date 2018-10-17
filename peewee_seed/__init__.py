@@ -10,7 +10,7 @@ logger = logging.getLogger("peewee")
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"
 
 
 class PeeweeSeed(object):
