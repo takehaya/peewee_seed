@@ -111,3 +111,21 @@ seeds.db_data_input(fixtures_row_data)
 # base on fixtures, drop tables 
 seeds.drop_table_all()
 ```
+
+### direct inputdata seed
+``` python
+# body is dict data
+# create & seed
+seed = PeeweeSeed(db)
+_, models = seed.load_fixtures([body])
+seed.create_table_all(models)
+
+seed.db_data_input([body])
+
+# body is modelpath(same to fixtures)
+# drop
+seed = PeeweeSeed(db)
+
+models = body["models"]
+seed.drop_table_all(models)
+```

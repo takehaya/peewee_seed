@@ -10,7 +10,7 @@ logger = logging.getLogger("peewee")
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 
 class PeeweeSeed(object):
@@ -30,10 +30,11 @@ class PeeweeSeed(object):
         self.fixture_files = fixture_files
 
     # getter
-    def get_tables(self, fixture_data=None):
-        _, models_list = self.load_fixtures(fixture_data)
+    def get_tables(self, models_path_list=None, fixture_data=None):
+        if models_path_list is None:
+            _, models_path_list = self.load_fixtures(fixture_data)
         model_table = []
-        for models_str in models_list:
+        for models_str in models_path_list:
             model = self.__get_tablemodel_class(models_str)
             if not (model[0] in model_table):
                 model_table.append(model[0])
@@ -41,14 +42,12 @@ class PeeweeSeed(object):
         return model_table
 
     # db move
-    def create_table_all(self, tables_list=None, not_exist_create=True):
-        if tables_list is None:
-            tables_list = self.get_tables()
+    def create_table_all(self, models_path_list=None, not_exist_create=True):
+        tables_list = self.get_tables(models_path_list)
         self.__create_table(tables_list, not_exist_create)
 
-    def drop_table_all(self, tables_list=None):
-        if tables_list is None:
-            tables_list = self.get_tables()
+    def drop_table_all(self, models_path_list=None):
+        tables_list = self.get_tables(models_path_list)
         self.db.drop_tables(tables_list)
 
     def __create_table(self, tables, not_exist_create=True):
