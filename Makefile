@@ -8,7 +8,7 @@ test-deploy: build
 
 .PHONY: build
 build:
-	python setup.py sdist bdist_wheel
+	python setup.py bdist_wheel
 
 .PHONY: clean
 clean:

@@ -30,8 +30,8 @@ class PeeweeSeed(object):
         self.fixture_files = fixture_files
 
     # getter
-    def get_tables(self):
-        _, models_list = self.load_fixtures()
+    def get_tables(self, fixture_data=None):
+        _, models_list = self.load_fixtures(fixture_data)
         model_table = []
         for models_str in models_list:
             model = self.__get_tablemodel_class(models_str)
@@ -41,13 +41,15 @@ class PeeweeSeed(object):
         return model_table
 
     # db move
-    def create_table_all(self, not_exist_create=True):
-        tables = self.get_tables()
-        self.__create_table(tables, not_exist_create)
+    def create_table_all(self, tables_list=None, not_exist_create=True):
+        if tables_list is None:
+            tables_list = self.get_tables()
+        self.__create_table(tables_list, not_exist_create)
 
-    def drop_table_all(self):
-        tables = self.get_tables()
-        self.db.drop_tables(tables)
+    def drop_table_all(self, tables_list=None):
+        if tables_list is None:
+            tables_list = self.get_tables()
+        self.db.drop_tables(tables_list)
 
     def __create_table(self, tables, not_exist_create=True):
         self.db.create_tables(tables, safe=not_exist_create)
