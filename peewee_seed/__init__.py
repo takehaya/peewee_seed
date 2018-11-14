@@ -4,13 +4,8 @@ import os
 
 import yaml
 
-import logging
 
-logger = logging.getLogger("peewee")
-logger.setLevel(logging.DEBUG)
-logger.addHandler(logging.StreamHandler())
-
-__version__ = "0.1.5"
+__version__ = "0.1.6"
 
 
 class PeeweeSeed(object):
@@ -53,8 +48,14 @@ class PeeweeSeed(object):
     def __create_table(self, tables, not_exist_create=True):
         self.db.create_tables(tables, safe=not_exist_create)
 
-    def __drop_table(self, tables):
+    def __drop_table(self, tables, foreign_key_checks=False):
+        if foreign_key_checks:
+            self.db.execute_sql('SET FOREIGN_KEY_CHECKS=0;')
+
         self.db.drop_tables(tables)
+
+        if foreign_key_checks:
+            self.db.execute_sql('SET FOREIGN_KEY_CHECKS=1;')
 
     # fixture loads
     # fixtures read data
@@ -127,7 +128,10 @@ class PeeweeSeed(object):
         return fixtures_fields, fixtures_models
 
     # fixtures data to db input
-    def db_data_input(self, fixture_data=None):
+    def db_data_input(self, fixture_data=None, foreign_key_checks=False):
+
+        if foreign_key_checks:
+            self.db.execute_sql('SET FOREIGN_KEY_CHECKS=0;')
 
         if fixture_data is None:
             fixture_data = self.load_fixture_files(self.fixture_files)
@@ -146,3 +150,6 @@ class PeeweeSeed(object):
         except Exception:
             self.db.rollback()
             raise Exception("Error. db rollback")
+
+        if foreign_key_checks:
+            self.db.execute_sql('SET FOREIGN_KEY_CHECKS=1;')

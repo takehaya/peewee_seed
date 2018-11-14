@@ -129,3 +129,16 @@ seed = PeeweeSeed(db)
 models = body["models"]
 seed.drop_table_all(models)
 ```
+
+#### error: Foreign key constraint
+
+```python
+
+# seed
+seed.db_data_input([body], foreign_key_checks=True)
+
+# db drop
+seed.drop_table_all(models, foreign_key_checks=True)
+
+
+```
