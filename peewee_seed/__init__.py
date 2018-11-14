@@ -5,7 +5,7 @@ import os
 import yaml
 
 
-__version__ = "0.1.6"
+__version__ = "0.1.7"
 
 
 class PeeweeSeed(object):
@@ -41,21 +41,23 @@ class PeeweeSeed(object):
         tables_list = self.get_tables(models_path_list)
         self.__create_table(tables_list, not_exist_create)
 
-    def drop_table_all(self, models_path_list=None):
+    def drop_table_all(self, models_path_list=None, foreign_key_checks=False):
+        if foreign_key_checks:
+            self.db.execute_sql('SET FOREIGN_KEY_CHECKS=0;')
+
         tables_list = self.get_tables(models_path_list)
         self.db.drop_tables(tables_list)
+
+        if foreign_key_checks:
+            self.db.execute_sql('SET FOREIGN_KEY_CHECKS=1;')
 
     def __create_table(self, tables, not_exist_create=True):
         self.db.create_tables(tables, safe=not_exist_create)
 
-    def __drop_table(self, tables, foreign_key_checks=False):
-        if foreign_key_checks:
-            self.db.execute_sql('SET FOREIGN_KEY_CHECKS=0;')
-
+    def __drop_table(self, tables):
         self.db.drop_tables(tables)
 
-        if foreign_key_checks:
-            self.db.execute_sql('SET FOREIGN_KEY_CHECKS=1;')
+
 
     # fixture loads
     # fixtures read data
