@@ -43,21 +43,19 @@ class PeeweeSeed(object):
 
     def drop_table_all(self, models_path_list=None, foreign_key_checks=False):
         if foreign_key_checks:
-            self.db.execute_sql('SET FOREIGN_KEY_CHECKS=0;')
+            self.db.execute_sql("SET FOREIGN_KEY_CHECKS=0;")
 
         tables_list = self.get_tables(models_path_list)
         self.db.drop_tables(tables_list)
 
         if foreign_key_checks:
-            self.db.execute_sql('SET FOREIGN_KEY_CHECKS=1;')
+            self.db.execute_sql("SET FOREIGN_KEY_CHECKS=1;")
 
     def __create_table(self, tables, not_exist_create=True):
         self.db.create_tables(tables, safe=not_exist_create)
 
     def __drop_table(self, tables):
         self.db.drop_tables(tables)
-
-
 
     # fixture loads
     # fixtures read data
@@ -83,7 +81,7 @@ class PeeweeSeed(object):
                     if file.endswith(".yaml") or file.endswith(".yml"):
                         data = yaml.load(f)
                     elif file.endswith(".json"):
-                        data = json.loads(f)
+                        data = json.load(f)
                     else:
                         continue
                     fixtures.append(data)
@@ -133,7 +131,7 @@ class PeeweeSeed(object):
     def db_data_input(self, fixture_data=None, foreign_key_checks=False):
 
         if foreign_key_checks:
-            self.db.execute_sql('SET FOREIGN_KEY_CHECKS=0;')
+            self.db.execute_sql("SET FOREIGN_KEY_CHECKS=0;")
 
         if fixture_data is None:
             fixture_data = self.load_fixture_files(self.fixture_files)
@@ -154,4 +152,4 @@ class PeeweeSeed(object):
             raise Exception("Error. db rollback")
 
         if foreign_key_checks:
-            self.db.execute_sql('SET FOREIGN_KEY_CHECKS=1;')
+            self.db.execute_sql("SET FOREIGN_KEY_CHECKS=1;")
