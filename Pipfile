@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pyyaml = "*"
+pyyaml = ">=4.2b1"
 peewee = "*"
 
 [dev-packages]
@@ -21,3 +21,6 @@ fmt = "black --py36 ."
 lint = "flake8"
 unused = "autoflake -i --remove-all-unused-imports --remove-unused-variables --exclude .venv -r ."
 imports = "isort --recursive --force-single-line --skip .venv ."
+
+[pipenv]
+allow_prereleases = true
