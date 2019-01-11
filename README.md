@@ -48,7 +48,7 @@ class Account(BaseModel):
 - seeds entry file
 ``` python
 # seeds_entry.py
-from peewee_seeds import PeeweeSeeds
+from peewee_seeds import PeeweeSeed
 from myapp.models import database
 
 
@@ -56,7 +56,7 @@ def main():
     path = '/path/to/fixtures'
     
     # seeds instance
-    seeds = PeeweeSeeds(database, path, ['accounts.yaml'])
+    seeds = PeeweeSeed(database, path, ['accounts.yaml'])
     
     # load fixture for create table
     seeds.create_table_all()
