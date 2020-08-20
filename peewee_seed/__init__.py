@@ -59,7 +59,7 @@ class PeeweeSeed(object):
 
     # fixture loads
     # fixtures read data
-    def load_fixture_files(self, files=None):
+    def load_fixture_files(self, files=None, encoding='utf-8'):
         fixtures = []
 
         if self.path is None:
@@ -77,9 +77,9 @@ class PeeweeSeed(object):
                 if not os.path.exists(fixture_path):
                     continue
 
-                with open(fixture_path, "r") as f:
+                with open(fixture_path, "r", encoding=encoding) as f:
                     if file.endswith(".yaml") or file.endswith(".yml"):
-                        data = yaml.load(f)
+                        data = yaml.safe_load(f)
                     elif file.endswith(".json"):
                         data = json.load(f)
                     else:
